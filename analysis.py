@@ -26,8 +26,3 @@ df_diff = df_diff[df_diff['EXITS'] > -1]
 df_diff = df_diff[df_diff['EXITS'] < 100000]
 
 df_diff
-
-len(df['STATION'].unique())
-df['CONC'] = df['SCP'] + df['C/A']
-len(df['CONC'].unique())
-df.columns
