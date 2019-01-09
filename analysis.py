@@ -1,16 +1,17 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import qgrid
+import datetime
 
 df = pd.read_csv('data/May18_turnstiledata.csv')
 df
+df.columns = [column.strip() for column in df.columns]
 df.columns
 
-df.rename(columns = {'EXITS                                                               ': 'EXITS'},inplace=True)
-df.columns
-del df['Unnamed: 0']
+df = df.drop(['Unnamed: 0'], axis=1)
 
+grouped = df.groupby(['C/A', 'UNIT', 'SCP', 'STATION','DATE','TIME'], as_index=False)
+grouped['DATETIME'] = pd.to_datetime(df['DATE']+" "+df['TIME'])
 df['EXITS'] = df['EXITS'].diff()
 df['ENTRIES'] = df['ENTRIES'].diff()
 
